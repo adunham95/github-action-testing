@@ -9752,7 +9752,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"github-actions","version":"1.10.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
+module.exports = JSON.parse('{"name":"github-actions","version":"1.12.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1","semver":"^7.3.8"}}');
 
 /***/ })
 
@@ -9817,12 +9817,17 @@ try {
       if (latestRelease.status !== 200) {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
-      await octokit.rest.repos.createRelease({
-        owner,
-        repo,
-        tag_name: myVersion,
-        body: body || ''
-      })
+
+      const currentTag = await octokit.rest.git.getRef(`tab/${latestRelease.data.tag_name}`)
+
+      console.log("currentTag", currentTag)
+
+    //   await octokit.rest.repos.createRelease({
+    //     owner,
+    //     repo,
+    //     tag_name: myVersion,
+    //     body: body || ''
+    //   })
 
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
