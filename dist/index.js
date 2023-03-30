@@ -9752,7 +9752,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"github-actions","version":"1.6.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
+module.exports = JSON.parse('{"name":"github-actions","version":"1.7.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
 
 /***/ })
 
