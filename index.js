@@ -28,6 +28,8 @@ try {
 
       console.log("releaseNotes", releaseNotes)
 
+      //comments
+
     //   await octokit.rest.repos.createRelease({
     //     owner,
     //     repo,
