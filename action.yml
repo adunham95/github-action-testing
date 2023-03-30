@@ -7,7 +7,7 @@ inputs:
     default: 'World'
   token:
     description: 'Your GITHUB_TOKEN'
-    default: ${{ secrets.GITHUB_TOKEN }}
+    default: ${{ github.token }}
     required: false
 outputs:
   time: # id of output
