@@ -1,4 +1,8 @@
-on: [push]
+name: "Tag Release"
+on: 
+  push:
+    branches: 
+      - main
 
 jobs:
   hello_world_job:
@@ -10,7 +14,6 @@ jobs:
         uses: adunham95/github-action-testing@v1.11
         with:
           who-to-greet: 'Adrian'
-          token: ${{ secrets.GITHUB_TOKEN }}
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"

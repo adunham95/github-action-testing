@@ -9,7 +9,6 @@ try {
     const myToken = core.getInput('token')
     const octokit = github.getOctokit(myToken)
     const {owner, repo} = github.context.repo
-    const body = ""
     const latestRelease = await octokit.rest.repos.getLatestRelease({
         owner,
         repo
