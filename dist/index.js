@@ -9827,12 +9827,15 @@ try {
 
       console.log("releaseNotes", releaseNotes)
 
-    //   await octokit.rest.repos.createRelease({
-    //     owner,
-    //     repo,
-    //     tag_name: myVersion,
-    //     body: body || ''
-    //   })
+      //comments
+      // more comments
+
+      await octokit.rest.repos.createRelease({
+        owner,
+        repo,
+        tag_name: myVersion,
+        body: releaseNotes.body || ""
+      })
 
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
