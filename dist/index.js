@@ -9818,7 +9818,7 @@ try {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
 
-      const releaseNotes= octokit.rest.repos.generateReleaseNotes({
+      const releaseNotes= await octokit.rest.repos.generateReleaseNotes({
         owner,
         repo,
         tag_name: myToken,
