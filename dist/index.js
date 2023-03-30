@@ -9818,10 +9818,14 @@ try {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
 
-      const currentTag = await octokit.rest.git.getTag({owner,
-        repo, ref: `tags/${latestRelease.data.tag_name}`})
+      const releaseNotes= octokit.rest.repos.generateReleaseNotes({
+        owner,
+        repo,
+        tag_name: myToken,
+        previous_tag_name: latestRelease.data.tag_name
+      });
 
-      console.log("currentTag", currentTag)
+      console.log("releaseNotes", releaseNotes)
 
     //   await octokit.rest.repos.createRelease({
     //     owner,
