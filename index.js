@@ -20,7 +20,7 @@ try {
       }
 
       const currentTag = await octokit.rest.git.getTag({owner,
-        repo, ref: `tags/$latestRelease.data.tag_name`})
+        repo, ref: `tags/${latestRelease.data.tag_name}`})
 
       console.log("currentTag", currentTag)
 
