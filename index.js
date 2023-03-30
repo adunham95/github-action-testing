@@ -19,7 +19,8 @@ try {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
 
-      const currentTag = await octokit.rest.git.getRef(`tab/${latestRelease.data.tag_name}`)
+      const currentTag = await octokit.rest.git.getTag({owner,
+        repo, tagSha: latestRelease.data.tag_name})
 
       console.log("currentTag", currentTag)
 
