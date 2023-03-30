@@ -18,12 +18,17 @@ try {
       if (latestRelease.status !== 200) {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
-      await octokit.rest.repos.createRelease({
-        owner,
-        repo,
-        tag_name: myVersion,
-        body: body || ''
-      })
+
+      const currentTag = await octokit.rest.git.getRef(`tab/${latestRelease.data.tag_name}`)
+
+      console.log("currentTag", currentTag)
+
+    //   await octokit.rest.repos.createRelease({
+    //     owner,
+    //     repo,
+    //     tag_name: myVersion,
+    //     body: body || ''
+    //   })
 
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
