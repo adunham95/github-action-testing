@@ -14,13 +14,14 @@ try {
         owner,
         repo
       })
+      console.log('latestRelease', latestRelease)
       if (latestRelease.status !== 200) {
         throw Error(`Failed to get latest release (status=${latestRelease.status})`)
       }
       await octokit.rest.repos.createRelease({
         owner,
         repo,
-        tag_name: inputVersion,
+        tag_name: myVersion,
         body: body || ''
       })
 
