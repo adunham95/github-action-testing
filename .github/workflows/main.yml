@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: adunham95/github-action-testing@v1
+        uses: adunham95/github-action-testing@v1.11
         with:
           who-to-greet: 'Adrian'
           token: ${{ secrets.GITHUB_TOKEN }}
