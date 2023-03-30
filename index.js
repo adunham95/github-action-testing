@@ -2,8 +2,28 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { version } = require('./package.json');
 
+async function run(){
 try {
-    console.log(`Version Number: ${version}`)
+    const myVersion = `v${version}`
+    console.log(`Version Number: ${myVersion}`)
+    const myToken = core.getInput('token')
+    const octokit = github.getOctokit(myToken)
+    const {owner, repo} = github.context.repo
+    const body = ""
+    const latestRelease = await octokit.rest.repos.getLatestRelease({
+        owner,
+        repo
+      })
+      if (latestRelease.status !== 200) {
+        throw Error(`Failed to get latest release (status=${latestRelease.status})`)
+      }
+      await octokit.rest.repos.createRelease({
+        owner,
+        repo,
+        tag_name: inputVersion,
+        body: body || ''
+      })
+
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
   console.log(`Hello ${nameToGreet}!`);
@@ -15,3 +35,5 @@ try {
 } catch (error) {
   core.setFailed(error.message);
 }
+}
+run()

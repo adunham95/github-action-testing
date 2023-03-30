@@ -9752,7 +9752,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"github-actions","version":"1.4.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
+module.exports = JSON.parse('{"name":"github-actions","version":"1.5.0","description":"","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1","build":"ncc build index.js --license licenses.txt"},"repository":{"type":"git","url":"git+https://github.com/adunham95/github-action-testing.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/adunham95/github-action-testing/issues"},"homepage":"https://github.com/adunham95/github-action-testing#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
 
 /***/ })
 
@@ -9801,8 +9801,28 @@ const core = __nccwpck_require__(4926);
 const github = __nccwpck_require__(9616);
 const { version } = __nccwpck_require__(4147);
 
+async function run(){
 try {
-    console.log(`Version Number: ${version}`)
+    const myVersion = `v${version}`
+    console.log(`Version Number: ${myVersion}`)
+    const myToken = core.getInput('token')
+    const octokit = github.getOctokit(myToken)
+    const {owner, repo} = github.context.repo
+    const body = ""
+    const latestRelease = await octokit.rest.repos.getLatestRelease({
+        owner,
+        repo
+      })
+      if (latestRelease.status !== 200) {
+        throw Error(`Failed to get latest release (status=${latestRelease.status})`)
+      }
+      await octokit.rest.repos.createRelease({
+        owner,
+        repo,
+        tag_name: inputVersion,
+        body: body || ''
+      })
+
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
   console.log(`Hello ${nameToGreet}!`);
@@ -9814,6 +9834,8 @@ try {
 } catch (error) {
   core.setFailed(error.message);
 }
+}
+run()
 })();
 
 module.exports = __webpack_exports__;
